@@ -12,10 +12,10 @@ ifneq (,$(findstring arm,$(UNAME_M)))
 	$(MAKE) arm
 endif
 
-arm: sample-library.so
+arm:
 	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c ptrace.c inject-arm.c -ldl
 
-x86_64: inject.so
+x86_64:
 	$(CC) $(CFLAGS) -shared -o inject.so utils.c ptrace.c inject-x86_64.c elf-parse.c -fPIC
 	
 clean:
