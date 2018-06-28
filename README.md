@@ -1,13 +1,13 @@
 # CoreHook.ProcessInjection
 
 
-Helper libraries for process injection used by CoreHook on Linux and macOS.
+Helper libraries for process injection used by [CoreHook](https://github.com/unknownv2/CoreHook) on Linux and macOS.
 
 ## Building
 
 First, clone the repository with:
 ```
-git clone https://github.com/unknownv2/CoreHook.ProcessInjection
+git clone https://github.com/unknownv2/CoreHook.ProcessInjection.git
 ```
 ## Linux
 
