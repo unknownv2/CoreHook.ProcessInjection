@@ -17,6 +17,14 @@ cd Linux
 make
 ```
 
+**Note:** The `Linux` injection method uses `ptrace` to attach and inject the library into the target process, which is prevented by the kernel if the target process was not created by the process attempting injection.
+
+To disable this security feature until the next reboot, use the command:
+
+```
+echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+``` 
+
 ## macOS
 
 You need `Xcode` installed, then build with:
