@@ -179,11 +179,6 @@ int injectLibrary(pid_t target,char * libname)
 	int mypid = getpid();
 	long mylibcaddr = getlibcaddr(mypid);
 
-	int libPathLength = strlen(libPath) + 1;
-
-	int mypid = getpid();
-	long mylibcaddr = getlibcaddr(mypid);
-
 	// find the addresses of the syscalls that we'd like to use inside the
 	// target, as loaded inside THIS process (i.e. NOT the target process)
 	long mallocAddr = getFunctionAddress("malloc");
