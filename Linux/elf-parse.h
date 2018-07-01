@@ -21,6 +21,8 @@
 // ld --verbose
 #ifdef __x86_64__
 #define PROGRAM_LOAD_ADDRESS 0x400000
+#elif ARM
+#define PROGRAM_LOAD_ADDRESS 0x00010000
 #else
 #define PROGRAM_LOAD_ADDRESS 0x08048000
 #endif

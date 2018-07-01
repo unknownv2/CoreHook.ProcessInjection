@@ -13,7 +13,7 @@ ifneq (,$(findstring arm,$(UNAME_M)))
 endif
 
 arm:
-	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c ptrace.c inject-arm.c -ldl
+	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c ptrace.c inject-arm.c elf-parse.c -ldl
 
 x86_64:
 	$(CC) $(CFLAGS) -shared -o inject.so utils.c ptrace.c inject-x86_64.c elf-parse.c -fPIC
