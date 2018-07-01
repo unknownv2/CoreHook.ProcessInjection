@@ -174,11 +174,13 @@ siginfo_t ptrace_getsiginfo(pid_t target)
 
 void ptrace_read(int pid, unsigned long addr, void *vptr, int len)
 {
+	printf("ptrace_read called pid % dat %d, len %d\n", pid, addr, len);	
 	int bytesRead = 0;
 	int i = 0;
 	long word = 0;
 	long *ptr = (long *) vptr;
-
+	//printf("ptrace_read looping\n");
+	if(bytesRead < len) {
 	while (bytesRead < len)
 	{
 		word = ptrace(PTRACE_PEEKTEXT, pid, addr + bytesRead, NULL);
@@ -188,7 +190,13 @@ void ptrace_read(int pid, unsigned long addr, void *vptr, int len)
 			exit(1);
 		}
 		bytesRead += sizeof(word);
+		printf("ptrace_read %ux\n", word);
 		ptr[i++] = word;
+	}
+	}
+	else {
+		printf("INVALID: ptrace_read called at %d, len %d\n", addr, len);	
+	
 	}
 }
 
@@ -217,7 +225,7 @@ ptrace_read_string(int pid, unsigned long start)
     if(!end)
         return NULL;
 		
-	//fprintf(stderr, "ptrace_read_string len = %d\n", end-start);
+	fprintf(stderr, "ptrace_read_string len = %d\n", end-start);
 		
     str = (char *)malloc(end-start + 1);
 	memset(str, 0, (unsigned int)(end-start) + 1);
@@ -237,7 +245,7 @@ bool ptrace_read2(int pid, unsigned long addr, void *data, unsigned int len)
 		word = ptrace(PTRACE_PEEKTEXT, pid, addr + bytesRead, NULL);
 		if (word == -1)
 		{
-			fprintf(stderr, "ptrace(PTRACE_PEEKTEXT) failed\n");
+			//fprintf(stderr, "ptrace(PTRACE_PEEKTEXT) failed\n");
 			return false;
 		}
 		bytesRead += sizeof(long);

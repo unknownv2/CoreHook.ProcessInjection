@@ -276,9 +276,11 @@ INJECT_EXPORT long find_symbol(elf_rt_t *target, char *sym_name, char *lib_name)
     ElfW(Sym) * sym;
     dyn_info_t dyninfo;
 
-    Xdebug("start symbol search \'%s\'...", sym_name);
+    Xinfo2("start symbol search \'%s\'...", sym_name);
+    Xinfo2("%s", "reading link_map");
 
     linkmap_addr = target->dyn.linkmap_public->l_next;
+    Xinfo2("linkmap_addr \'%p\'...", linkmap_addr);
 
     while (!sym_addr && linkmap_addr)
     {
@@ -293,17 +295,17 @@ INJECT_EXPORT long find_symbol(elf_rt_t *target, char *sym_name, char *lib_name)
             if (strcmp(lib_name, soname) != 0)
                 continue;
 
-        Xdebug("start search libaray: %s", soname);
+        Xinfo2("start search libaray: %s", soname);
         parse_PT_DYNAMIC(&dyninfo, target->input, linkmap.l_ld);
         sym = find_symbol_in_lib(&dyninfo, target->input, sym_name);
         if (sym)
         {
             sym_addr = sym->st_value + linkmap.l_addr;
-            Xdebug("found \'%s\' at %p", sym_name, sym_addr);
+            Xinfo2("found \'%s\' at %p", sym_name, sym_addr);
             return sym_addr;
         }
     }
 
-    Xinfo("not found \'%s\'", sym_name);
+    Xinfo2("not found \'%s\'", sym_name);
     return 0;
 }
