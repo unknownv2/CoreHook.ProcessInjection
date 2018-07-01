@@ -152,51 +152,27 @@ void injectSharedLibrary(long mallocaddr, long freeaddr, long dlopenaddr)
 void injectSharedLibrary_end()
 {
 }
+static int injectLibrary(pid_t target,char * libname);
 
-int main(int argc, char** argv)
+int injectByPid(pid_t targetPid, char* libName)
 {
-	if(argc < 4)
-	{
-		usage(argv[0]);
-		return 1;
-	}
+	return injectLibrary(targetPid, libName);
+}
+int injectByName(char * processName, char* libName, pid_t* pid)
+{
+	pid_t targetPid = findProcessByName(processName);
 
-	char* command = argv[1];
-	char* commandArg = argv[2];
-	char* libname = argv[3];
+	if(pid != NULL)
+	{
+		*pid = targetPid;
+	}
+	return injectLibrary(targetPid, libName);
+}
+int injectLibrary(pid_t target,char * libname)
+{
 	char* libPath = realpath(libname, NULL);
 
-	char* processName = NULL;
-	pid_t target = 0;
-
-	if(!libPath)
-	{
-		fprintf(stderr, "can't find file \"%s\"\n", libname);
-		return 1;
-	}
-
-	if(!strcmp(command, "-n"))
-	{
-		processName = commandArg;
-		target = findProcessByName(processName);
-		if(target == -1)
-		{
-			fprintf(stderr, "doesn't look like a process named \"%s\" is running right now\n", processName);
-			return 1;
-		}
-
-		printf("targeting process \"%s\" with pid %d\n", processName, target);
-	}
-	else if(!strcmp(command, "-p"))
-	{
-		target = atoi(commandArg);
-		printf("targeting process with pid %d\n", target);
-	}
-	else
-	{
-		usage(argv[0]);
-		return 1;
-	}
+	printf("inject into process with pid %d\n", target);
 
 	int libPathLength = strlen(libPath) + 1;
 
