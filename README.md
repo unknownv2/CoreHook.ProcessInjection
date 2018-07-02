@@ -8,6 +8,7 @@ Helper libraries for process injection used by [CoreHook](https://github.com/unk
 First, clone the repository with:
 ```
 git clone https://github.com/unknownv2/CoreHook.ProcessInjection.git
+cd CoreHook.ProcessInjection
 ```
 ## Linux
 
@@ -17,7 +18,7 @@ cd Linux
 make
 ```
 
-**Note:** The `Linux` injection method uses `ptrace` to attach and inject the library into the target process, which is prevented by the kernel if the target process was not created by the process attempting injection.
+**Note:** The `Linux` injection method uses `ptrace` to attach and inject the library into the target process, which is prevented on some systems by the kernel if the target process was not created by the process attempting injection.
 
 To disable this security feature until the next reboot, use the command:
 
