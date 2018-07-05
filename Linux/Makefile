@@ -2,7 +2,7 @@ CC	= clang
 CFLAGS	= -std=gnu99 -ggdb
 UNAME_M := $(shell uname -m)
 
-.PHONY: x86_64 arm
+.PHONY: x86_64 arm arm64
 
 all:
 ifeq ($(UNAME_M),x86_64)
@@ -11,12 +11,16 @@ endif
 ifneq (,$(findstring arm,$(UNAME_M)))
 	$(MAKE) arm
 endif
+ifeq ($(UNAME_M),aarch64)
+	$(MAKE) arm64
+endif
 
 arm:
-	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c elf-parse.c -ldl
-
+	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c ptrace.c inject-arm.c elf-parse.c -ldl
+arm64:
+	$(CC) $(CFLAGS) -DARM64 -shared -o inject.so utils.c ptrace.c inject-arm.c elf-parse.c -ldl -fPIC
 x86_64:
-	$(CC) $(CFLAGS) -shared -o inject.so elf-parse.c utils.c -fPIC
+	$(CC) $(CFLAGS) -shared -o inject.so utils.c ptrace.c inject-x86_64.c elf-parse.c -fPIC
 	
 clean:
 	rm -f inject.so
