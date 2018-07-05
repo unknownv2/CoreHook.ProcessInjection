@@ -32,11 +32,7 @@
 #define link_map_public link_map
 #include <link.h>
 #undef link_map
-#if defined(__GNUC__)
-#define INJECT_EXPORT __attribute__((visibility("default")))
-#else
-#define INJECT_EXPORT
-#endif
+#include "inject.h"
 // linker's link_map
 typedef struct dyn_info
 {
