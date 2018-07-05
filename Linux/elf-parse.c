@@ -10,12 +10,12 @@ INJECT_EXPORT void set_pid(elf_rt_t *target, pid_t pid)
 
 bool elf_rt_read(elf_rt_input_t input, long addr, void *data, long len)
 {
-    return ptrace_read2(input.pid, addr, data, len);
+    return ptrace_read(input.pid, addr, data, len);
 }
 
 bool elf_rt_off_read(elf_rt_input_t input, long addr, void *data, long len)
 {
-    return ptrace_read2(input.pid, addr + input.vmaddr, data, len);
+    return ptrace_read(input.pid, addr + input.vmaddr, data, len);
 }
 char *
 elf_rt_read_string(elf_rt_input_t input, long addr)
