@@ -1,7 +1,6 @@
 #include "utils.h"
 #include "elf-parse.h"
 #include "cli.h"
-#include "ptrace.h"
 
 INJECT_EXPORT void set_pid(elf_rt_t *target, pid_t pid)
 {

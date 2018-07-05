@@ -32,7 +32,7 @@
 #define link_map_public link_map
 #include <link.h>
 #undef link_map
-#include "inject.h"
+
 // linker's link_map
 typedef struct dyn_info
 {
