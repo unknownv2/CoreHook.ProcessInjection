@@ -46,7 +46,7 @@ INJECT_EXPORT bool ptrace_read(int pid, unsigned long addr, void *data, unsigned
 	word = ptrace(PTRACE_PEEKTEXT, pid, addr + bytesRead, NULL);
 	if (word == -1)
 	{
-	    fprintf(stderr, "ptrace(PTRACE_PEEKTEXT) failed\n");
+	    //fprintf(stderr, "ptrace(PTRACE_PEEKTEXT) failed\n");
 	    return false;
 	}
 	bytesRead += sizeof(long);
