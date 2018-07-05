@@ -1,6 +1,5 @@
 #include "cli.h"
 #include "elf-parse.h"
-#include "utils.h"
 
 #define _print_line_sep (printf("--------------------------------------------------------------\n"))
 
