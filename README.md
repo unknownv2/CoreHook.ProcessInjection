@@ -17,8 +17,14 @@ Make sure you have `clang` installed, then build with:
 cd Linux
 make
 ```
+It will produce `inject.so` which you will copy to the output directory of the program you build.
 
-**Note:** The `Linux` injection method uses `ptrace` to attach and inject the library into the target process, which is prevented on some systems by the kernel if the target process was not created by the process attempting injection.
+Then build the injection library found [here by kubo](https://github.com/kubo/injector).
+
+Copy the `libinjector.so` file produced by the make command to the output directory of the program you build.
+
+
+**Note:** As described [here](https://github.com/gaffe23/linux-inject#caveat-about-ptrace), the `Linux` injection method uses `ptrace` to attach and inject the library into the target process, which is prevented on some systems by the kernel if the target process was not created by the process attempting injection.
 
 To disable this security feature until the next reboot, use the command:
 
