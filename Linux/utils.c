@@ -39,7 +39,7 @@ void ptrace_read(int pid, unsigned long addr, void *data, int len)
 			exit(1);
 		}
 		bytesRead += sizeof(word);
-		printf("ptrace_read %u\n", word);
+		//printf("ptrace_read %u\n", word);
 		ptr[i++] = word;
 	}
 	}
