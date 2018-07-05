@@ -16,11 +16,11 @@ ifeq ($(UNAME_M),aarch64)
 endif
 
 arm:
-	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c ptrace.c inject-arm.c elf-parse.c -ldl
+	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c elf-parse.c -ldl
 arm64:
-	$(CC) $(CFLAGS) -DARM64 -shared -o inject.so utils.c ptrace.c inject-arm.c elf-parse.c -ldl -fPIC
+	$(CC) $(CFLAGS) -DARM64 -shared -o inject.so utils.c elf-parse.c -ldl -fPIC
 x86_64:
-	$(CC) $(CFLAGS) -shared -o inject.so utils.c ptrace.c inject-x86_64.c elf-parse.c -fPIC
+	$(CC) $(CFLAGS) -shared -o inject.so utils.c elf-parse.c -fPIC
 	
 clean:
 	rm -f inject.so
