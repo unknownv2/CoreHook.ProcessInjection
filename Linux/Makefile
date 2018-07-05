@@ -13,10 +13,10 @@ ifneq (,$(findstring arm,$(UNAME_M)))
 endif
 
 arm:
-	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so ptrace.c elf-parse.c -ldl
+	$(CC) -marm $(CFLAGS) -DARM -shared -o inject.so utils.c elf-parse.c -ldl
 
 x86_64:
-	$(CC) $(CFLAGS) -shared -o inject.so ptrace.c elf-parse.c -fPIC
+	$(CC) $(CFLAGS) -shared -o inject.so elf-parse.c utils.c -fPIC
 	
 clean:
 	rm -f inject.so
